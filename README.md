@@ -33,8 +33,8 @@ An interactive web-based tool for testing and visualizing Tiled Map Editor JSON 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/tiled-map-tester.git
-cd tiled-map-tester
+git clone https://github.com/yourusername/Map-Implementation-Project.git
+cd Map-Implementation-Project
 ```
 
 2. Open `index.html` in a web browser or serve using a local server.
