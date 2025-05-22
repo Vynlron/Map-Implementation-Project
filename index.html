@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tiled Map Tester</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+</head>
+<body>
+  <div class="main-layout">
+    <aside class="sidebar sidebar-panel" id="sidebarPanel">
+      <h1>Tiled Map Tester</h1>
+      <div class="instructions">
+        <p><strong>Instructions:</strong></p>
+        <ol>
+          <li>Export your Tiled map as a <strong>JSON file</strong>.</li>
+          <li>Make sure "Embed tilesets" is <strong>unchecked</strong> when exporting.</li>
+          <li>Upload both your Tiled JSON map file and tileset image(s).</li>
+          <li>Enter the <strong>exact</strong> tileset name (case-sensitive).</li>
+          <li>Adjust tile dimensions if needed (default 32×32px).</li>
+          <li>You can use a layer named "collision" or a layer with a <code>collision</code> property set to <strong>true</strong>.</li>
+          <li>Click "Load Map & Start" and use <strong>Arrow Keys</strong> to move the player.</li>
+        </ol>
+      </div>
+      <div class="controls advanced-controls">
+        <div id="warningPanel" class="warning" style="display:none;">Warning message goes here</div>
+        <div class="form-row">
+          <label for="mapFile">Tiled JSON Map:</label>
+          <input type="file" id="mapFile" accept=".json" />
+        </div>
+        <div class="form-row">
+          <label for="tilesetFile">Tileset Image:</label>
+          <input type="file" id="tilesetFile" accept="image/*" />
+        </div>
+        <div class="form-row">
+          <label for="tilesetNameInTiled">Tileset Name:</label>
+          <input type="text" id="tilesetNameInTiled" placeholder="e.g., terrain_tiles" />
+        </div>
+        <div class="form-row">
+          <label for="tileWidth">Tile Width (px):</label>
+          <input type="number" id="tileWidth" value="32" min="8" max="256" />
+        </div>
+        <div class="form-row">
+          <label for="tileHeight">Tile Height (px):</label>
+          <input type="number" id="tileHeight" value="32" min="8" max="256" />
+        </div>
+        <div class="form-row speed-control">
+          <label>Player Speed:</label>
+          <div class="speed-control-group">
+            <div class="speed-buttons">
+              <button type="button" data-speed="100" class="speed-btn">Slow</button>
+              <button type="button" data-speed="200" class="speed-btn active">Normal</button>
+              <button type="button" data-speed="400" class="speed-btn">Fast</button>
+            </div>
+            <div class="speed-input-group">
+              <input type="number" id="customSpeed" value="200" min="50" max="1000" step="10">
+              <span class="speed-unit">px/s</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="checkbox-label">
+            <input type="checkbox" id="showDebug" />
+            Show Debug Panel
+          </label>
+        </div>
+        <div class="form-row">
+          <label class="checkbox-label">
+            <input type="checkbox" id="enableCollision" checked />
+            Enable Collision (based on layer property)
+          </label>
+        </div>
+        <div id="statusMsg" class="status"></div>
+        <button id="loadButton">Load Map & Start</button>
+      </div>
+      <div class="footer">
+        <p>Use arrow keys to move. Press SPACE to toggle physics debug.</p>
+        <p style="font-size:0.95em; color:#888;">
+          <strong>Tips:</strong> Drag and drop your files for quick loading.
+        </p>
+        <p style="font-size:0.9em;">
+          <a href="https://www.mapeditor.org/" target="_blank" rel="noopener">Get Tiled Map Editor</a> |
+          <a href="https://phaser.io/" target="_blank" rel="noopener">Powered by Phaser 3</a>
+        </p>
+      </div>
+    </aside>
+    <main class="main-content">
+      <div id="gameContainer">
+        <button id="fullscreenBtn" class="fullscreen-btn" title="Toggle Fullscreen">⤢</button>
+        <div class="loading-overlay" id="loadingOverlay">
+          <div class="spinner"></div>
+          <div id="loadingText">Loading...</div>
+        </div>
+        <div id="debugPanel" class="debug-panel"></div>
+      </div>
+    </main>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
